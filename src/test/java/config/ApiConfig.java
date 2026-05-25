@@ -9,10 +9,12 @@ public class ApiConfig {
 
     private final String baseUrl;
     private final String basePath;
+    private final String apiKey;
 
     private ApiConfig() {
         this.baseUrl = config.getString("api.baseUrl");
         this.basePath = config.getString("api.basePath");
+        this.apiKey = config.getString("api.apiKey");
     }
 
     public static ApiConfig getInstance() {
@@ -25,5 +27,9 @@ public class ApiConfig {
 
     public String basePath() {
         return basePath;
+    }
+
+    public String apiKey() {
+        return apiKey;
     }
 }

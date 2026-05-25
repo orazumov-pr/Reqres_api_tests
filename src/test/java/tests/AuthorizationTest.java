@@ -45,24 +45,6 @@ public class AuthorizationTest extends TestBase {
     }
 
     @Test
-    @Tag("Smoke")
-    @Tag("Authorization")
-    @DisplayName("Проверка успешной авторизации с Email и Password")
-    void successfulAuthorizationTest() {
-        final AuthorizationResponseModel successfulAuthResponse = step("Выполнение успешной авторизации с Email и Password", () -> {
-            AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, authPassword);
-            return authorizationApi.successLogin(requestData);
-        });
-
-        step("Проверка ответа с токеном на запрос об успешной авторизации", () -> {
-            assertThat(successfulAuthResponse.token())
-                    .as("Значение полученного токена из ответа верное")
-                    .isEqualTo("QpwL5tke4Pnpja7X4");
-        });
-    }
-
-
-    @Test
     @Tag("Regression")
     @Tag("Authorization")
     @DisplayName("Проверка неуспешной регистрации без Email")

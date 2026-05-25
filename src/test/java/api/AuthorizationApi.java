@@ -1,5 +1,6 @@
 package api;
 
+import config.ApiConfig;
 import models.AuthorizationBodyModel;
 import models.AuthorizationErrorModel;
 import models.AuthorizationResponseModel;
@@ -11,10 +12,12 @@ public class AuthorizationApi {
 
     private static final String REGISTER_ENDPOINT = "/register";
     private static final String LOGIN_ENDPOINT = "/login";
+    private final String apiKey = ApiConfig.getInstance().apiKey();
 
     public AuthorizationResponseModel successRegister(AuthorizationBodyModel requestData) {
         return given()
                 .spec(baseRequestSpec())
+                .header("x-api-key", apiKey)
                 .body(requestData)
                 .when()
                 .post(REGISTER_ENDPOINT)
@@ -27,6 +30,7 @@ public class AuthorizationApi {
     public AuthorizationResponseModel successLogin(AuthorizationBodyModel requestData) {
         return given()
                 .spec(baseRequestSpec())
+                .header("x-api-key", apiKey)
                 .body(requestData)
                 .when()
                 .post(LOGIN_ENDPOINT)
@@ -39,6 +43,7 @@ public class AuthorizationApi {
     public AuthorizationErrorModel errorRegister(AuthorizationBodyModel requestData) {
         return given()
                 .spec(baseRequestSpec())
+                .header("x-api-key", apiKey)
                 .body(requestData)
                 .when()
                 .post(REGISTER_ENDPOINT)
@@ -51,6 +56,7 @@ public class AuthorizationApi {
     public AuthorizationErrorModel errorLogin(AuthorizationBodyModel requestData) {
         return given()
                 .spec(baseRequestSpec())
+                .header("x-api-key", apiKey)
                 .body(requestData)
                 .when()
                 .post(LOGIN_ENDPOINT)
