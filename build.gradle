@@ -50,6 +50,8 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
             "org.assertj:assertj-core:$assertjVersion",
             "org.slf4j:slf4j-simple:2.0.9",
+            "com.fasterxml.jackson.core:jackson-annotations:2.21",
+            "org.aeonbits.owner:owner:1.0.12",
             "com.typesafe:config:1.4.2"
     )
 
