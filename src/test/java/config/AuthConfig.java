@@ -3,22 +3,39 @@ package config;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-public interface AuthConfig {
-    Config config = ConfigFactory.load();
+public class AuthConfig {
+    private static final Config config = ConfigFactory.load();
+    private static final AuthConfig instance = new AuthConfig();
 
-    default String authEmail() {
-        return config.getString("auth.email");
+    private final String authEmail;
+    private final String authPassword;
+    private final String authUndefinedEmail;
+    private final String authUndefinedPassword;
+
+    private AuthConfig() {
+        this.authEmail = config.getString("auth.email");
+        this.authPassword = config.getString("auth.password");
+        this.authUndefinedEmail = config.getString("auth.undefinedEmail");
+        this.authUndefinedPassword = config.getString("auth.undefinedPassword");
     }
 
-    default String authPassword() {
-        return config.getString("auth.password");
+    public static AuthConfig getInstance() {
+        return instance;
     }
 
-    default String authUndefinedEmail() {
-        return config.getString("auth.undefinedEmail");
+    public String authEmail() {
+        return authEmail;
     }
 
-    default String authUndefinedPassword() {
-        return config.getString("auth.undefinedPassword");
+    public String authPassword() {
+        return authPassword;
+    }
+
+    public String authUndefinedEmail() {
+        return authUndefinedEmail;
+    }
+
+    public String authUndefinedPassword() {
+        return authUndefinedPassword;
     }
 }
