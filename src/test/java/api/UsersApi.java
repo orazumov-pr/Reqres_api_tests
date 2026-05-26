@@ -22,6 +22,19 @@ public class UsersApi {
                 .as(ListUsersResponseModel.class);
     }
 
+    public ListUsersResponseModel getListUsersWithDelay(int page, int delay) {
+        return given()
+                .spec(baseRequestSpec())
+                .queryParam("page", page)
+                .queryParam("delay", delay)
+                .when()
+                .get(USERS_ENDPOINT)
+                .then()
+                .spec(successResponseSpec())
+                .extract()
+                .as(ListUsersResponseModel.class);
+    }
+
     public SingleUserResponseModel getSingleUser(int userId) {
         return given()
                 .spec(baseRequestSpec())
@@ -62,6 +75,18 @@ public class UsersApi {
                 .body(requestData)
                 .when()
                 .put(USERS_ENDPOINT + "/" + userId)
+                .then()
+                .spec(successResponseSpec())
+                .extract()
+                .as(UpdateUserResponseModel.class);
+    }
+
+    public UpdateUserResponseModel patchUser(int userId, UpdateUserRequestModel requestData) {
+        return given()
+                .spec(baseRequestSpec())
+                .body(requestData)
+                .when()
+                .patch(USERS_ENDPOINT + "/" + userId)
                 .then()
                 .spec(successResponseSpec())
                 .extract()
