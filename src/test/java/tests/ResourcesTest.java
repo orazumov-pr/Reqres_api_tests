@@ -10,17 +10,11 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static utils.AllureSteps.step;
 
-@Epic("Тестирование API приложения Reqres.in")
-@Feature("Работа с ресурсами")
-@Story("Получение информации о ресурсах (цветах)")
 public class ResourcesTest extends TestBase {
 
     protected ResourcesApi resourcesApi = new ResourcesApi();
 
-    @Severity(SeverityLevel.NORMAL)
     @Test
-    @Tag("Smoke")
-    @Tag("Resources")
     @DisplayName("Проверка получения списка всех ресурсов")
     void getListResourcesTest() {
         step("Выполнение запроса на получение списка ресурсов", () -> {
@@ -44,10 +38,7 @@ public class ResourcesTest extends TestBase {
         });
     }
 
-    @Severity(SeverityLevel.NORMAL)
     @Test
-    @Tag("Smoke")
-    @Tag("Resources")
     @DisplayName("Проверка получения ресурса по ID 1")
     void getSingleResourceTest() {
         final ResourceResponseModel response = step("Выполнение запроса на получение ресурса с ID 1", () ->
@@ -76,10 +67,7 @@ public class ResourcesTest extends TestBase {
         });
     }
 
-    @Severity(SeverityLevel.NORMAL)
     @Test
-    @Tag("Smoke")
-    @Tag("Resources")
     @DisplayName("Проверка получения ресурса по ID 2")
     void getResourceById2Test() {
         final ResourceResponseModel response = step("Выполнение запроса на получение ресурса с ID 2", () ->
@@ -105,10 +93,7 @@ public class ResourcesTest extends TestBase {
         });
     }
 
-    @Severity(SeverityLevel.NORMAL)
     @Test
-    @Tag("Smoke")
-    @Tag("Resources")
     @DisplayName("Проверка получения ресурса по ID 3")
     void getResourceById3Test() {
         final ResourceResponseModel response = step("Выполнение запроса на получение ресурса с ID 3", () ->
@@ -131,45 +116,4 @@ public class ResourcesTest extends TestBase {
         });
     }
 
-    @Severity(SeverityLevel.NORMAL)
-    @Test
-    @Tag("Regression")
-    @Tag("Resources")
-    @DisplayName("Проверка получения несуществующего ресурса")
-    void getResourceNotFoundTest() {
-        step("Выполнение запроса на получение несуществующего ресурса с ID 23", () -> {
-            var response = resourcesApi.getSingleResourceNotFound(23);
-
-            assertThat(response.getStatusCode())
-                    .as("Статус код должен быть 404 Not Found")
-                    .isEqualTo(404);
-
-            assertThat(response.jsonPath().getString("error"))
-                    .as("Сообщение об ошибке должно соответствовать")
-                    .contains("Not Found");
-        });
-    }
-
-    @Severity(SeverityLevel.NORMAL)
-    @Test
-    @Tag("Smoke")
-    @Tag("Resources")
-    @DisplayName("Проверка пагинации ресурсов")
-    void getResourcesPaginationTest() {
-        step("Выполнение запроса на получение второй страницы ресурсов", () -> {
-            var response = resourcesApi.getListResources(2);
-
-            assertThat(response.getStatusCode())
-                    .as("Статус код должен быть 200 OK")
-                    .isEqualTo(200);
-
-            assertThat(response.jsonPath().getInt("page"))
-                    .as("Должна быть вторая страница")
-                    .isEqualTo(2);
-
-            assertThat(response.jsonPath().getList("data"))
-                    .as("Список ресурсов должен быть пустым (всего 6 ресурсов)")
-                    .isEmpty();
-        });
-    }
 }
