@@ -12,7 +12,7 @@ public class UsersApi {
 
     public ListUsersResponseModel getListUsers(int page) {
         return given()
-                .spec(baseRequestSpec())
+                .spec(baseRequestSpec()) // Эта спецификация уже содержит API ключ
                 .queryParam("page", page)
                 .when()
                 .get(USERS_ENDPOINT)

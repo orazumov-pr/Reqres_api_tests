@@ -15,10 +15,7 @@ public class TestBase {
         RestAssured.baseURI = apiConfig.baseUrl();
         RestAssured.basePath = apiConfig.basePath();
 
-        // Добавляем API ключ в глобальные заголовки
-        RestAssured.useRelaxedHTTPSValidation();
-
-        // Опционально: добавляем глобальный фильтр для API ключа
+        // Настройка логирования
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
 }
