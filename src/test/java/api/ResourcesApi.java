@@ -21,18 +21,6 @@ public class ResourcesApi {
                 .response();
     }
 
-    public Response getListResources(int page) {
-        return given()
-                .spec(baseRequestSpec())
-                .queryParam("page", page)
-                .when()
-                .get(RESOURCES_ENDPOINT)
-                .then()
-                .spec(successResponseSpec())
-                .extract()
-                .response();
-    }
-
     public ResourceResponseModel getSingleResource(int resourceId) {
         return given()
                 .spec(baseRequestSpec())
@@ -44,14 +32,4 @@ public class ResourcesApi {
                 .as(ResourceResponseModel.class);
     }
 
-    public Response getSingleResourceNotFound(int resourceId) {
-        return given()
-                .spec(baseRequestSpec())
-                .when()
-                .get(RESOURCES_ENDPOINT + "/" + resourceId)
-                .then()
-                .spec(notFoundResponseSpec())
-                .extract()
-                .response();
-    }
 }

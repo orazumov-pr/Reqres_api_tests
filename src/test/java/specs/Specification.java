@@ -37,12 +37,6 @@ public class Specification {
                 .log().all();
     }
 
-    public static RequestSpecification baseRequestSpecWithoutApiKey() {
-        return with()
-                .contentType(ContentType.JSON)
-                .log().all();
-    }
-
     public static ResponseSpecification successResponseSpec() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)

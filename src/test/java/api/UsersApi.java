@@ -22,19 +22,6 @@ public class UsersApi {
                 .as(ListUsersResponseModel.class);
     }
 
-    public ListUsersResponseModel getListUsersWithDelay(int page, int delay) {
-        return given()
-                .spec(baseRequestSpec())
-                .queryParam("page", page)
-                .queryParam("delay", delay)
-                .when()
-                .get(USERS_ENDPOINT)
-                .then()
-                .spec(successResponseSpec())
-                .extract()
-                .as(ListUsersResponseModel.class);
-    }
-
     public SingleUserResponseModel getSingleUser(int userId) {
         return given()
                 .spec(baseRequestSpec())
